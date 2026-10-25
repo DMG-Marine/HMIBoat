@@ -22,6 +22,10 @@ Window {
     Keys.onReleased: (event) => {
         if (event.key === Qt.Key_Escape)
             Qt.quit()
+        if (event.key === Qt.Key_D) {
+            mainwindow.dashboardV2 = !mainwindow.dashboardV2
+            map.width = mainwindow.dashboardV2 ? 980 : 1100
+        }
     }
     Boat { id: boat }
 
@@ -44,6 +48,7 @@ Window {
     }
 
     property bool menuopen : false
+    property bool dashboardV2: false
 
     Plugin {
         id: osmPlugin
@@ -139,8 +144,19 @@ Window {
     }
 
 
+    DashboardV2 {
+        id: dashboardV2Panel
+        boat: boat
+        visible: mainwindow.dashboardV2
+        onExitRequested: {
+            mainwindow.dashboardV2 = false
+            map.width = 1100
+        }
+    }
+
     MenuBoat{
         id:mainmenuboat
+        visible: !mainwindow.dashboardV2
         dynamicsize:mainwindow.height
         anchors.top: parent.top
         anchors.left: parent.left
@@ -149,6 +165,7 @@ Window {
     }
     MenuLogo{
         id:menulogo
+        visible: !mainwindow.dashboardV2
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.topMargin: 10
@@ -173,6 +190,7 @@ Window {
         property bool reduced : false
         property int page: 1       // commence à 1
         property int maxpage: 5
+        visible: !mainwindow.dashboardV2
 
         Behavior on width {
             NumberAnimation{
@@ -248,8 +266,7 @@ Window {
                                  boat.rootMap.BMS.RightBattLevel  / 100 * 400: 50, 500)
             anchors.left: rpmRightGrey.right
             anchors.bottom: rectangle.bottom
-            anchors.margins: -65
-            anchors.rightMargin: -70
+            anchors.leftMargin: -65
             anchors.bottomMargin: 150
             color:"#20CC16"
             radius: 20
@@ -268,7 +285,6 @@ Window {
             height: 400
             anchors.right: rectangle.right
             anchors.bottom: rectangle.bottom
-            anchors.margins: -20
             anchors.rightMargin: 60
             anchors.bottomMargin: 150
             color:"#8F8F8F"
@@ -279,7 +295,7 @@ Window {
                 text: "Right"
                 anchors.top: parent.top
                 anchors.topMargin: -40
-                anchors.centerIn: parent
+                anchors.horizontalCenter: parent.horizontalCenter
                 color: "#efe7e5"
                 font.pixelSize: 24
                 font.family: "Orbitron"
@@ -293,7 +309,6 @@ Window {
             height:Math.min(motorRValue, 500)
             anchors.right: rectangle.right
             anchors.bottom: parent.bottom
-            anchors.margins: -30
             anchors.rightMargin: 60
             anchors.bottomMargin: 150
             color:"#E6E6E6"
@@ -312,7 +327,7 @@ Window {
                 text: boat.rootMap && boat.rootMap.nav ? boat.rootMap.nav.MotorR : "0"
                 anchors.top: parent.top
                 anchors.topMargin: 40
-                anchors.centerIn: parent
+                anchors.horizontalCenter: parent.horizontalCenter
                 color: "#333333"
                 font.pixelSize: 20
                 font.family: "Orbitron"
@@ -326,8 +341,7 @@ Window {
                                  boat.rootMap.BMS.LeftBattLevel  / 100 * 400: 50, 500)
             anchors.left: rpmLeftGrey.left
             anchors.bottom: rectangle.bottom
-            anchors.margins: -15
-            anchors.rightMargin: -70
+            anchors.leftMargin: -15
             anchors.bottomMargin: 150
             color:"#20CC16"
             radius: 20
@@ -345,7 +359,6 @@ Window {
             height: 400
             anchors.right: rectangle.right
             anchors.bottom: rectangle.bottom
-            anchors.margins: -30
             anchors.rightMargin: 170
             anchors.bottomMargin: 150
             color:"#8F8F8F"
@@ -356,7 +369,7 @@ Window {
                 text: "Left"
                 anchors.top: rpmLeftGrey.top
                 anchors.topMargin: -40
-                anchors.centerIn: parent
+                anchors.horizontalCenter: parent.horizontalCenter
                 color: "#efe7e5"
                 font.pixelSize: 24
                 font.family: "Orbitron"
@@ -370,7 +383,6 @@ Window {
             height: Math.min(motorLValue, 500)
             anchors.right: rectangle.right
             anchors.bottom: rectangle.bottom
-            anchors.margins: -30
             anchors.rightMargin: 170
             anchors.bottomMargin: 150
             color:"#E6E6E6"
@@ -390,7 +402,7 @@ Window {
                 text: boat.rootMap && boat.rootMap.nav ? boat.rootMap.nav.MotorL : "0"
                 anchors.top: parent.top
                 anchors.topMargin: 40
-                anchors.centerIn: parent
+                anchors.horizontalCenter: parent.horizontalCenter
                 color: "#333333"
                 font.pixelSize: 20
                 font.family: "Orbitron"
@@ -402,7 +414,6 @@ Window {
             text: boat.rootMap && boat.rootMap.nav ? boat.rootMap.nav.speed : "0"
             anchors.right: rectangle.right
             anchors.top: parent.top
-            anchors.margins: -30
             anchors.rightMargin: 90
             anchors.topMargin: 50
             color: "#efe7e5"
@@ -413,7 +424,6 @@ Window {
                 id: speedTextUnit
                 text: "Knots"
                 anchors.right: parent.right
-                anchors.margins: -30
                 anchors.rightMargin: -80
                 color: "#efe7e5"
                 font.pixelSize: 24
