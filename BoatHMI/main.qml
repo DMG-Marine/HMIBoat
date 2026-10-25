@@ -279,7 +279,7 @@ Window {
                 text: "Right"
                 anchors.top: parent.top
                 anchors.topMargin: -40
-                anchors.centerIn: parent.center
+                anchors.centerIn: parent
                 color: "#efe7e5"
                 font.pixelSize: 24
                 font.family: "Orbitron"
@@ -356,7 +356,7 @@ Window {
                 text: "Left"
                 anchors.top: rpmLeftGrey.top
                 anchors.topMargin: -40
-                anchors.centerIn: parent.center
+                anchors.centerIn: parent
                 color: "#efe7e5"
                 font.pixelSize: 24
                 font.family: "Orbitron"

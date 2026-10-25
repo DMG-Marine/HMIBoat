@@ -146,7 +146,7 @@ Rectangle {
             Loader {
                 id: graphLoader
                 anchors.fill: parent
-                active: true   // ← chargé une fois au démarrage, jamais détruit
+                active: panel.page === 2   // ← chargé une fois au démarrage, jamais détruit
                 sourceComponent: Component {
                     GraphBoat {
                         boat: panel.boat
@@ -176,7 +176,7 @@ Rectangle {
             Loader {
                 id: graphLoaderML
                 anchors.fill: parent
-                active: true   // ← chargé une fois au démarrage, jamais détruit
+                active: panel.page === 2   // ← chargé une fois au démarrage, jamais détruit
                 sourceComponent: Component {
                     GraphBoat {
                         boat: panel.boat
