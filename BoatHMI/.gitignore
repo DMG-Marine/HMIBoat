@@ -1,0 +1,10 @@
+build*/
+*.o
+moc_*
+qrc_*
+Makefile*
+*.user
+*.qm
+.qmake.stash
+*.db
+BoatHMI
