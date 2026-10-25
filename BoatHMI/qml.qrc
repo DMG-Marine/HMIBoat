@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>Boatinfo.qml</file>
+        <file>MenuBoat.qml</file>
+        <file>MenuLogo.qml</file>
+        <file>GraphBoat.qml</file>
+    </qresource>
+</RCC>
