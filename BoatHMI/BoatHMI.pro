@@ -34,8 +34,6 @@ CONFIG += lrelease
 CONFIG += embed_translations
 
 # Include & Lib pour Qt6Mqtt compilé à la main
-INCLUDEPATH += /home/jonathan/qtmqtt/include
-LIBS += -L/home/jonathan/qtmqtt/build -lQt6Mqtt
 
 # Deployment paths
 qnx: target.path = /tmp/$${TARGET}/bin
